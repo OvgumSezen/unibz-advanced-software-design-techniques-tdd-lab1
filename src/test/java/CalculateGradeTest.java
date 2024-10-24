@@ -1,4 +1,6 @@
 import org.asdt.Grade;
+import org.asdt.exception.ExamGradeValidationException;
+import org.asdt.exception.LabPointsValidationException;
 import org.junit.jupiter.api.Test;
 
 import static org.asdt.CalculateGrade.calculateGrade;
@@ -29,7 +31,7 @@ public class CalculateGradeTest {
         float examGrade = 11.5F;
         String expectedExceptionMessage = "Exam grade should be between 0 and 10.";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculateGrade(labPoints, examGrade));
+        Exception exception = assertThrows(ExamGradeValidationException.class, () -> calculateGrade(labPoints, examGrade));
         String actualExceptedMessage = exception.getMessage();
 
         assertTrue(actualExceptedMessage.contains(expectedExceptionMessage));
@@ -41,7 +43,7 @@ public class CalculateGradeTest {
         float examGrade = -1.5F;
         String expectedExceptionMessage = "Exam grade should be between 0 and 10.";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculateGrade(labPoints, examGrade));
+        Exception exception = assertThrows(ExamGradeValidationException.class, () -> calculateGrade(labPoints, examGrade));
         String actualExceptionMessage = exception.getMessage();
 
         assertTrue(actualExceptionMessage.contains(expectedExceptionMessage));
@@ -67,7 +69,7 @@ public class CalculateGradeTest {
         float examGrade = 8F;
         String expectedExceptionMessage = "Lab Points should be non-negative.";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculateGrade(labPoints, examGrade));
+        Exception exception = assertThrows(LabPointsValidationException.class, () -> calculateGrade(labPoints, examGrade));
         String actualExceptionMessage = exception.getMessage();
 
         assertTrue(actualExceptionMessage.contains(expectedExceptionMessage));
