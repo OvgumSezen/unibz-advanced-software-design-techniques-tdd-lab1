@@ -3,6 +3,8 @@ package org.asdt;
 import org.asdt.exception.ExamGradeValidationException;
 import org.asdt.exception.LabPointsValidationException;
 
+//TEMP COMMENT
+
 public class CalculateGrade {
     public static Grade calculateGrade(int labPoints, float examGrade) throws Exception {
         checkInputValidity(labPoints, examGrade);
