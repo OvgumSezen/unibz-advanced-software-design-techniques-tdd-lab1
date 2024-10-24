@@ -1,4 +1,4 @@
-name: Maven Test CI
+name: Run Tests
 
 on:
   push:
@@ -38,5 +38,16 @@ jobs:
       # Step 5 Run Tests
       - name: maven test
         run: mvn test --no-transfer-progress
+
+      # Step 6: Generate Coverage Report
+      - name: jacoco coverage report
+        run: mvn jacoco:report
+
+      # Step 7: Upload Jacoco report as artifact (optional, for debugging)
+      - name: Upload Jacoco Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/index.html
 
       # Step 6 Profit???
