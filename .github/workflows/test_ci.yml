@@ -22,12 +22,21 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      # Step 3 Build Maven Project
+
+      # Step 3 Cache Maven Dependencies
+      - name: cache maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+
+      # Step 4 Build Maven Project
       - name: maven build
         run: mvn clean install --no-transfer-progress
 
-      # Step 4 Run Tests
+      # Step 5 Run Tests
       - name: maven test
         run: mvn test --no-transfer-progress
 
-      # Step 5 Profit???
+      # Step 6 Profit???
